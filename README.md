@@ -1,2 +1,1 @@
-# atp
- Annual Training Planner
+Annual Training Planner 1.0
