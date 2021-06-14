@@ -1,0 +1,64 @@
+loss project
+
+  $request->validate([
+      'name' => 'required',
+      'coy_name' => 'required',
+      'trade' => 'required',
+      'joining_date' => 'required',
+      'sainik_id' => 'required|unique:users',
+      'rank' => 'required'
+    ]);
+
+    $user = User::find('id');
+    $user->name = $request->name;
+    $user->coy_name= $request->coy_name;
+    $user->rank = $request->rank;
+    $user->sainik_id = $request->sainik_id;
+    $user->trade = $request->trade;
+    $user->joining_date = $request->joining_date;
+
+    //hidden
+    if($request->email == "admin@atp.com"){
+      $user->type = "admin";
+    }
+    else{
+      $user->type = "user";
+    }
+
+    $save = $user->save();
+
+    if($save) {
+      return back()->with('success','profile updated');
+    }
+    else {
+      return back()->with('fail','Something went wrong, try again Later!');
+    }
+
+
+
+
+<form method="GET" action="update-profile">
+                        @csrf
+
+                        
+                    </form>
+
+
+
+
+$user = User::where('id','=',session('LoggedUser'))->first();
+
+  $id = $user->id;
+
+
+  
+  $request->validate([
+          'sainik_id' => 'required|unique:users',
+        ]);
+
+    $tags_data = [
+                'sainik_id' => $request->sainik_id           
+            ];
+
+
+    
